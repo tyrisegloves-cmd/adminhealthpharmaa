@@ -1,0 +1,443 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #0f766e;
+  --color-primary-dark: #0d5c56;
+  --color-primary-light: #14b8a6;
+  --color-secondary: #f0fdfa;
+  --color-accent: #ef4444;
+  --color-heart: #dc2626;
+  --color-heart-light: #fecaca;
+  --font-heading: 'Segoe UI', system-ui, sans-serif;
+}
+
+/* ═══════════════════════════════════════
+   KEYFRAMES
+   ═══════════════════════════════════════ */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes fadeOut {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(40px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.8); }
+  to { opacity: 1; transform: scale(1); }
+}
+@keyframes heartbeat {
+  0%, 100% { transform: scale(1); }
+  15% { transform: scale(1.3); }
+  30% { transform: scale(1); }
+  45% { transform: scale(1.15); }
+  60% { transform: scale(1); }
+}
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 5px rgba(15, 118, 110, 0.3); }
+  50% { box-shadow: 0 0 25px rgba(15, 118, 110, 0.6); }
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+@keyframes dotBounce {
+  0%, 80%, 100% { transform: scale(0.6); opacity: 0.4; }
+  40% { transform: scale(1.1); opacity: 1; }
+}
+
+@keyframes rippleExpand {
+  0% { transform: scale(0); opacity: 1; }
+  100% { transform: scale(1); opacity: 0; }
+}
+
+/* ═══════════════════════════════════════
+   ANIMATION UTILITIES
+   ═══════════════════════════════════════ */
+.animate-fade-in   { animation: fadeIn 0.5s ease-out forwards; }
+.animate-fade-out  { animation: fadeOut 0.5s ease-out forwards; }
+.animate-slide-up  { animation: slideUp 0.6s ease-out forwards; }
+.animate-slide-down{ animation: slideDown 0.5s ease-out forwards; }
+.animate-scale-in  { animation: scaleIn 0.5s ease-out forwards; }
+.animate-heartbeat { animation: heartbeat 1.5s ease-in-out infinite; }
+.animate-pulse-glow{ animation: pulse-glow 2s ease-in-out infinite; }
+.animate-float     { animation: float 3s ease-in-out infinite; }
+.animate-shimmer {
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+  background-size: 200% 100%;
+  animation: shimmer 2s infinite;
+}
+
+/* ═══════════════════════════════════════
+   BASE
+   ═══════════════════════════════════════ */
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-heading);
+  transition: background-color 0.35s ease, color 0.35s ease;
+}
+
+/* Light scrollbar */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: #f1f5f9; }
+::-webkit-scrollbar-thumb { background: #0f766e; border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: #0d5c56; }
+
+/* ═══════════════════════════════════════════════════════════
+   ██████  DARK MODE — FRIENDLY & POLISHED  ██████
+   
+   Design tokens
+   ─────────────
+   bg-base     : #0c1222   (deep navy — warm, easy on eyes)
+   bg-surface  : #131c2e   (cards, header)
+   bg-elevated : #1a2540   (raised cards, hovers)
+   bg-muted    : #1e2a45   (inputs, subtle backgrounds)
+   border-soft : #243352   (subtle borders — not harsh)
+   border-mid  : #2d3f63   (interactive borders)
+   text-primary: #f0f4f8   (headings)
+   text-body   : #c8d6e5   (body copy)
+   text-muted  : #8899b3   (secondary / helpers)
+   text-dim    : #5a6d8a   (placeholders)
+   accent-glow : rgba(20,184,166,0.12)  (teal tint)
+   ═══════════════════════════════════════════════════════════ */
+
+html.theme-dark body {
+  background: #0c1222;
+  color: #c8d6e5;
+}
+
+/* ── Scrollbar ── */
+html.theme-dark ::-webkit-scrollbar-track { background: #0c1222; }
+html.theme-dark ::-webkit-scrollbar-thumb { background: #14b8a6; }
+html.theme-dark ::-webkit-scrollbar-thumb:hover { background: #2dd4bf; }
+
+/* ═══ SURFACES ═══ */
+html.theme-dark .bg-white {
+  background-color: #131c2e !important;
+}
+html.theme-dark .bg-white\/95 {
+  background-color: rgba(19, 28, 46, 0.96) !important;
+  backdrop-filter: blur(16px) saturate(1.2) !important;
+}
+html.theme-dark .bg-gray-50 {
+  background-color: #0f1829 !important;
+}
+html.theme-dark .bg-gray-100 {
+  background-color: #1a2540 !important;
+}
+html.theme-dark .bg-gray-200 {
+  background-color: #1e2a45 !important;
+}
+
+/* Footer stays deeply dark */
+html.theme-dark .bg-gray-900 {
+  background-color: #070d18 !important;
+}
+
+/* ═══ TINTED ACCENT SURFACES ═══ */
+/* These pastel bg's get a subtle teal/colored tint instead of flat gray */
+html.theme-dark .bg-teal-50 {
+  background-color: rgba(20,184,166,0.08) !important;
+}
+html.theme-dark .bg-green-50 {
+  background-color: rgba(34,197,94,0.08) !important;
+}
+html.theme-dark .bg-blue-50 {
+  background-color: rgba(59,130,246,0.08) !important;
+}
+html.theme-dark .bg-amber-50 {
+  background-color: rgba(245,158,11,0.08) !important;
+}
+html.theme-dark .bg-red-50 {
+  background-color: rgba(239,68,68,0.08) !important;
+}
+html.theme-dark .bg-purple-50 {
+  background-color: rgba(168,85,247,0.08) !important;
+}
+
+/* Gradient "from" tints — subtle colored tint cards */
+html.theme-dark [class*="from-teal-50"],
+html.theme-dark [class*="from-emerald-50"] {
+  --tw-gradient-from: rgba(20,184,166,0.06) !important;
+}
+html.theme-dark [class*="from-blue-50"] {
+  --tw-gradient-from: rgba(59,130,246,0.06) !important;
+}
+html.theme-dark [class*="from-green-50"] {
+  --tw-gradient-from: rgba(34,197,94,0.06) !important;
+}
+html.theme-dark [class*="from-amber-50"] {
+  --tw-gradient-from: rgba(245,158,11,0.06) !important;
+}
+html.theme-dark [class*="from-purple-50"] {
+  --tw-gradient-from: rgba(168,85,247,0.06) !important;
+}
+
+html.theme-dark [class*="to-teal-100"],
+html.theme-dark [class*="to-emerald-100"],
+html.theme-dark [class*="to-blue-100"],
+html.theme-dark [class*="to-green-100"],
+html.theme-dark [class*="to-amber-100"],
+html.theme-dark [class*="to-purple-100"],
+html.theme-dark [class*="to-white"] {
+  --tw-gradient-to: transparent !important;
+}
+
+html.theme-dark [class*="from-white"] {
+  --tw-gradient-from: #131c2e !important;
+}
+
+/* ═══ TEXT ═══ */
+html.theme-dark .text-gray-900 { color: #f0f4f8 !important; }
+html.theme-dark .text-gray-800 { color: #dce4ee !important; }
+html.theme-dark .text-gray-700 { color: #c8d6e5 !important; }
+html.theme-dark .text-gray-600 { color: #a8bdd4 !important; }
+html.theme-dark .text-gray-500 { color: #8899b3 !important; }
+html.theme-dark .text-gray-400 { color: #5a6d8a !important; }
+html.theme-dark .text-gray-300 { color: #c8d6e5 !important; }
+
+/* ═══ BORDERS ═══ */
+html.theme-dark .border-gray-100 { border-color: #1e2a45 !important; }
+html.theme-dark .border-gray-200 { border-color: #243352 !important; }
+html.theme-dark .border-gray-300 { border-color: #2d3f63 !important; }
+html.theme-dark .border-gray-800 { border-color: #1a2540 !important; }
+
+/* Colored borders get subtle tinting */
+html.theme-dark .border-teal-100 { border-color: rgba(20,184,166,0.15) !important; }
+html.theme-dark .border-emerald-100 { border-color: rgba(16,185,129,0.15) !important; }
+html.theme-dark .border-green-200 { border-color: rgba(34,197,94,0.2) !important; }
+html.theme-dark .border-amber-200 { border-color: rgba(245,158,11,0.2) !important; }
+html.theme-dark .border-red-200 { border-color: rgba(239,68,68,0.2) !important; }
+html.theme-dark .border-blue-200 { border-color: rgba(59,130,246,0.2) !important; }
+
+/* ═══ FORM CONTROLS ═══ */
+html.theme-dark input,
+html.theme-dark textarea,
+html.theme-dark select {
+  background-color: #0f1829 !important;
+  color: #dce4ee !important;
+  border-color: #243352 !important;
+}
+html.theme-dark input:focus,
+html.theme-dark textarea:focus,
+html.theme-dark select:focus {
+  border-color: #14b8a6 !important;
+  box-shadow: 0 0 0 3px rgba(20,184,166,0.15) !important;
+}
+html.theme-dark input::placeholder,
+html.theme-dark textarea::placeholder {
+  color: #5a6d8a !important;
+}
+/* Checkbox / radio */
+html.theme-dark input[type="checkbox"] {
+  background-color: #1a2540 !important;
+  border-color: #2d3f63 !important;
+}
+
+/* ═══ SHADOWS — soft colored glow ═══ */
+html.theme-dark .shadow-sm {
+  box-shadow: 0 1px 3px rgba(0,0,0,0.3), 0 0 0 1px rgba(30,42,69,0.5) !important;
+}
+html.theme-dark .shadow-md,
+html.theme-dark .shadow-lg {
+  box-shadow: 0 4px 20px rgba(0,0,0,0.35), 0 0 0 1px rgba(30,42,69,0.4) !important;
+}
+html.theme-dark .shadow-xl,
+html.theme-dark .shadow-2xl {
+  box-shadow: 0 8px 40px rgba(0,0,0,0.45), 0 0 20px rgba(20,184,166,0.04) !important;
+}
+
+/* Primary button glow */
+html.theme-dark .shadow-primary\/20 {
+  --tw-shadow-color: rgba(20,184,166,0.15) !important;
+}
+html.theme-dark .shadow-primary\/30 {
+  --tw-shadow-color: rgba(20,184,166,0.2) !important;
+}
+
+/* ═══ HOVER STATES ═══ */
+html.theme-dark .hover\:bg-gray-50:hover {
+  background-color: #162036 !important;
+}
+html.theme-dark .hover\:bg-gray-100:hover {
+  background-color: #1e2a45 !important;
+}
+html.theme-dark .hover\:bg-gray-200:hover {
+  background-color: #243352 !important;
+}
+html.theme-dark .hover\:bg-teal-50:hover,
+html.theme-dark .hover\:bg-teal-100:hover {
+  background-color: rgba(20,184,166,0.12) !important;
+}
+html.theme-dark .hover\:bg-red-50:hover {
+  background-color: rgba(239,68,68,0.1) !important;
+}
+html.theme-dark .hover\:bg-red-100:hover {
+  background-color: rgba(239,68,68,0.15) !important;
+}
+html.theme-dark .hover\:text-gray-700:hover,
+html.theme-dark .hover\:text-gray-600:hover {
+  color: #f0f4f8 !important;
+}
+html.theme-dark .hover\:bg-primary:hover {
+  background-color: #0f766e !important;
+}
+
+/* Card border hover */
+html.theme-dark .hover\:border-primary\/20:hover {
+  border-color: rgba(20,184,166,0.25) !important;
+}
+html.theme-dark .hover\:border-primary\/30:hover {
+  border-color: rgba(20,184,166,0.35) !important;
+}
+html.theme-dark .hover\:border-gray-200:hover {
+  border-color: #2d3f63 !important;
+}
+
+/* ═══ IMAGES — softer in dark ═══ */
+html.theme-dark img {
+  opacity: 0.92;
+  transition: opacity 0.2s ease;
+}
+html.theme-dark img:hover {
+  opacity: 1;
+}
+
+/* ═══ DIVIDERS ═══ */
+html.theme-dark .divide-gray-100 > * + * {
+  border-color: #1e2a45 !important;
+}
+html.theme-dark .divide-gray-200 > * + * {
+  border-color: #243352 !important;
+}
+
+/* ═══ COLORED ALERT / NOTICE BOXES ═══ */
+/* Green success */
+html.theme-dark .bg-green-100 { background-color: rgba(34,197,94,0.12) !important; }
+html.theme-dark .text-green-600 { color: #4ade80 !important; }
+html.theme-dark .text-green-700 { color: #86efac !important; }
+
+/* Amber warning */
+html.theme-dark .bg-amber-100 { background-color: rgba(245,158,11,0.12) !important; }
+html.theme-dark .text-amber-500 { color: #fbbf24 !important; }
+html.theme-dark .text-amber-600 { color: #fcd34d !important; }
+html.theme-dark .text-amber-800 { color: #fde68a !important; }
+
+/* Blue info */
+html.theme-dark .bg-blue-100 { background-color: rgba(59,130,246,0.12) !important; }
+html.theme-dark .text-blue-500 { color: #60a5fa !important; }
+html.theme-dark .text-blue-700 { color: #93c5fd !important; }
+
+/* Red danger */
+html.theme-dark .bg-red-100 { background-color: rgba(239,68,68,0.12) !important; }
+html.theme-dark .text-red-500 { color: #f87171 !important; }
+html.theme-dark .text-red-600 { color: #fca5a5 !important; }
+
+/* ═══ BADGES / PILLS ═══ */
+html.theme-dark .bg-primary\/10 {
+  background-color: rgba(20,184,166,0.15) !important;
+}
+html.theme-dark .bg-teal-100 {
+  background-color: rgba(20,184,166,0.12) !important;
+}
+
+/* ═══ LINE-THROUGH / MUTED PRICE ═══ */
+html.theme-dark .line-through {
+  color: #5a6d8a !important;
+}
+
+/* ═══ STAR RATINGS ═══ */
+html.theme-dark .text-amber-400 {
+  color: #fbbf24 !important;
+}
+
+/* ═══ HERO GRADIENT SECTIONS ═══ */
+/* Hero gradients stay vibrant — just slightly deeper */
+html.theme-dark [class*="from-teal-600"],
+html.theme-dark [class*="from-primary"] {
+  --tw-gradient-from: #0a5e57 !important;
+}
+html.theme-dark [class*="to-emerald-600"],
+html.theme-dark [class*="to-emerald-700"],
+html.theme-dark [class*="to-emerald-800"] {
+  --tw-gradient-to: #064e3b !important;
+}
+
+/* ═══ WAVE SVG DIVIDER ═══ */
+html.theme-dark svg path[fill="white"] {
+  fill: #0f1829 !important;
+}
+
+/* ═══ FOOTER — deeper dark ═══ */
+html.theme-dark .text-gray-300 {
+  color: #8899b3 !important;
+}
+
+/* ═══ NEWSLETTER / SUBSCRIPTION SECTION ═══ */
+html.theme-dark .bg-teal-50 {
+  background-color: rgba(20,184,166,0.06) !important;
+}
+
+/* ═══ SMOOTH TRANSITION ON ALL ELEMENTS ═══ */
+html.theme-dark *,
+html.theme-dark *::before,
+html.theme-dark *::after {
+  transition-property: background-color, border-color, color, box-shadow;
+  transition-duration: 0.2s;
+  transition-timing-function: ease;
+}
+/* Don't override explicit transition durations */
+html.theme-dark [class*="duration-"] {
+  transition-property: all;
+}
+
+/* ═══ PROFILE / AUTH PAGE GRADIENT BACKGROUNDS ═══ */
+html.theme-dark .from-teal-50 {
+  --tw-gradient-from: rgba(20,184,166,0.04) !important;
+}
+html.theme-dark .via-white {
+  --tw-gradient-via: #0f1829 !important;
+}
+html.theme-dark .to-emerald-50 {
+  --tw-gradient-to: rgba(16,185,129,0.04) !important;
+}
+
+/* ═══ SPECIAL ELEMENT FIXES ═══ */
+/* Gradient overlay text on images */
+html.theme-dark .from-black\/60 {
+  --tw-gradient-from: rgba(0,0,0,0.75) !important;
+}
+
+/* Out-of-stock overlay */
+html.theme-dark .bg-black\/50 {
+  background-color: rgba(0,0,0,0.65) !important;
+}
+
+/* Dropdown / popover menus */
+html.theme-dark [class*="rounded-2xl"][class*="shadow-2xl"][class*="border"] {
+  border-color: #243352 !important;
+}
+
+/* Tab active underline — brighter in dark */
+html.theme-dark .bg-primary {
+  background-color: #0f766e !important;
+}
+
+/* White text on primary buttons stays white */
+html.theme-dark .bg-primary .text-white,
+html.theme-dark .bg-primary.text-white {
+  color: #ffffff !important;
+}
